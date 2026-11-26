@@ -73,43 +73,14 @@ node build.mjs
 
 ## 部署
 
-已部署在 Cloudflare Pages：<https://hilbert-blog.pages.dev>（项目名 `hilbert-blog`）。
+已通过 **Cloudflare Pages 原生 Git 集成**部署：<https://hilbert-blog.pages.dev>
 
-日常更新：
+- GitHub 仓库：<https://github.com/NGHXBXX/hilbert-blog>
+- 生产分支：`main`
+- Build command：`bash build-site.sh`
+- Build output directory：`_site`
 
-```bash
-./deploy.sh
-```
-
-首次使用前需要先 `npx wrangler login`。也可以直接把 [hilbert-blog-site.zip](hilbert-blog-site.zip) 拖到 Cloudflare Pages 控制台完成更新。详细步骤、费用与备案说明见 **[DEPLOY.md](DEPLOY.md)**。
-
-### 用 Git 自动部署（可选）
-
-当前 `hilbert-blog` 是 Cloudflare 的 **Direct Upload** 项目，Cloudflare 不允许 Direct Upload 项目直接切换成 Git 集成。想保留 `hilbert-blog.pages.dev` 这个地址，同时实现「push 到 GitHub 就自动上线」，用仓库里的 GitHub Actions 即可：
-
-1. 新建一个 GitHub 仓库，把 `personal-blog/` 推上去（默认分支用 `main`）。
-2. 在 Cloudflare 创建 API Token：
-   - 打开 **Account API Tokens**：<https://dash.cloudflare.com/?to=/:account/api-tokens>
-   - **Create Token** → 拉到底部 **Custom Token** → **Get started**
-   - **Permissions** 选：`Account` → `Cloudflare Pages` → `Edit`
-   - **Account Resources**：Include → 你自己的账户
-   - **Continue to summary** → **Create Token**，复制生成的 Token
-   - 注意：模板列表里没有「Cloudflare Pages: Edit」这一项，必须在 Custom Token 里手动选权限
-3. 在 GitHub 仓库 Settings → Secrets and variables → Actions 添加两个 Secret：
-   - `CLOUDFLARE_API_TOKEN`：上一步的 Token
-   - `CLOUDFLARE_ACCOUNT_ID`：Cloudflare 账户 ID，可以在 <https://dash.cloudflare.com/?to=/:account/workers-and-pages> 右侧复制，或从控制台地址栏 `dash.cloudflare.com/<32位ID>/...` 中复制
-4. 工作流文件是 [`.github/workflows/deploy-cloudflare.yml`](.github/workflows/deploy-cloudflare.yml)。之后每次 `git push` 到 `main`，GitHub Actions 会自动 `bash build-site.sh` 并部署到现有的 `hilbert-blog` 项目，地址不变。
-
-这个目录已经初始化成 git 仓库、提交了第一个 commit，并连上了 GitHub 仓库 `NGHXBXX/hilbert-blog`。如果你想换成别的仓库：
-
-```bash
-git remote set-url origin git@github.com:你的用户名/另一个仓库.git
-git push -u origin main
-```
-
-Cloudflare 的两个 Secret 没配好之前，工作流会自动跳过部署并给出提示，不影响仓库本身。
-
-只需要首次配置一次，以后写文章就是：
+现在不需要 API Token、GitHub Secrets 或手动上传。每次：
 
 ```bash
 git add .
@@ -117,9 +88,12 @@ git commit -m "new post"
 git push
 ```
 
-如果你更想用 Cloudflare 控制台的 **原生 Git 集成**，需要新建一个 Pages 项目并连接 GitHub 仓库（当前项目不能直接转换）；新项目会有一个新的 `*.pages.dev` 地址，除非你给它绑定自定义域名。
+Cloudflare Pages 会自动拉取仓库、运行构建并更新线上，地址保持不变。
+
+本地仍然可以用 `./deploy.sh` 手动构建和直接上传作为兜底，但当前项目以 Git 集成为主；Cloudflare 的 Git 集成项目不能再切回 Direct Upload。
 
 ## 目录结构
+
 
 ```
 personal-blog/
@@ -142,7 +116,6 @@ personal-blog/
 ├── build.mjs             # 零依赖生成器
 ├── build-site.sh         # 只构建、整理出 _site/
 ├── deploy.sh             # 一键构建 + 部署到 Cloudflare Pages
-├── .github/workflows/    # GitHub Actions 自动部署
 └── README.md
 ```
 

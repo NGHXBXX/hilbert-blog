@@ -1,6 +1,8 @@
 # 部署指南：不租服务器，把站点放上线
 
 > 当前线上地址：<https://hilbert-blog.pages.dev>（Cloudflare Pages，项目名 `hilbert-blog`）
+>
+> **当前已切换为 Git 集成部署**：push 到 GitHub `main` 会自动构建，不需要 API Token 或手动上传。下文的手动部署方式仅作为历史/兜底参考。
 
 你的站点是**纯静态**的（HTML + CSS + JS + 图片），所以完全不需要服务器。静态托管平台会直接把这些文件分发到 CDN 上，个人博客的流量用免费额度就足够了。
 
