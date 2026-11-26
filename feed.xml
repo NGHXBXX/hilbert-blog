@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom" xml:lang="zh-CN">
+  <title>Hilbert</title>
+  <subtitle>Hilbert 的个人网站。</subtitle>
+  <link href="https://hilbert-blog.pages.dev/feed.xml" rel="self"/>
+  <link href="https://hilbert-blog.pages.dev/"/>
+  <updated>2026-11-26T09:15:03.548Z</updated>
+  <id>https://hilbert-blog.pages.dev/</id>
+  <author>
+    <name>Hilbert</name>
+  </author>
+
+</feed>

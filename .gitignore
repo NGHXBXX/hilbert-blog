@@ -1,0 +1,10 @@
+.DS_Store
+.shots/
+node_modules/
+
+hilbert-blog-site.zip
+_site/
+.npm-cache/
+.wrangler-home/
+.wrangler/
+.git-ssh/

@@ -1,0 +1,14 @@
+{
+  "title": "Hilbert",
+  "owner": "Hilbert",
+  "description": "Hilbert 的个人网站。",
+  "url": "https://hilbert-blog.pages.dev",
+  "hero": {
+    "eyebrow": "PINNED · 置顶的一句话",
+    "quoteLines": [
+      "既已知道宇宙之辽阔，",
+      "怎能甘心偏安于一隅。"
+    ],
+    "highlight": "宇宙之辽阔"
+  }
+}

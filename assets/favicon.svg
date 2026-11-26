@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+  <defs>
+    <linearGradient id="night" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#0b1024"/>
+      <stop offset="1" stop-color="#05060d"/>
+    </linearGradient>
+    <linearGradient id="star" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#ffe6b0"/>
+      <stop offset="1" stop-color="#c7a7ff"/>
+    </linearGradient>
+  </defs>
+  <rect width="64" height="64" rx="14" fill="url(#night)"/>
+  <circle cx="32" cy="31" r="15" fill="#9ec1ff" opacity="0.1"/>
+  <path d="M32 13l4.2 13.8L50 31l-13.8 4.2L32 49l-4.2-13.8L14 31l13.8-4.2z" fill="url(#star)"/>
+  <circle cx="47" cy="15" r="1.5" fill="#cdb6ff"/>
+  <circle cx="16" cy="48" r="1.1" fill="#9ec1ff"/>
+  <circle cx="48" cy="46" r="0.9" fill="#ffe6b0"/>
+</svg>
