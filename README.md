@@ -89,11 +89,15 @@ node build.mjs
 
 1. 新建一个 GitHub 仓库，把 `personal-blog/` 推上去（默认分支用 `main`）。
 2. 在 Cloudflare 创建 API Token：
-   - Dashboard → My Profile → API Tokens → Create Token
-   - 用 **Cloudflare Pages: Edit** 模板，账户范围选你自己的账户
+   - 打开 **Account API Tokens**：<https://dash.cloudflare.com/?to=/:account/api-tokens>
+   - **Create Token** → 拉到底部 **Custom Token** → **Get started**
+   - **Permissions** 选：`Account` → `Cloudflare Pages` → `Edit`
+   - **Account Resources**：Include → 你自己的账户
+   - **Continue to summary** → **Create Token**，复制生成的 Token
+   - 注意：模板列表里没有「Cloudflare Pages: Edit」这一项，必须在 Custom Token 里手动选权限
 3. 在 GitHub 仓库 Settings → Secrets and variables → Actions 添加两个 Secret：
    - `CLOUDFLARE_API_TOKEN`：上一步的 Token
-   - `CLOUDFLARE_ACCOUNT_ID`：Cloudflare 账户 ID（Workers & Pages 概览页右侧可以复制）
+   - `CLOUDFLARE_ACCOUNT_ID`：Cloudflare 账户 ID，可以在 <https://dash.cloudflare.com/?to=/:account/workers-and-pages> 右侧复制，或从控制台地址栏 `dash.cloudflare.com/<32位ID>/...` 中复制
 4. 工作流文件是 [`.github/workflows/deploy-cloudflare.yml`](.github/workflows/deploy-cloudflare.yml)。之后每次 `git push` 到 `main`，GitHub Actions 会自动 `bash build-site.sh` 并部署到现有的 `hilbert-blog` 项目，地址不变。
 
 这个目录已经初始化成 git 仓库、提交了第一个 commit，并连上了 GitHub 仓库 `NGHXBXX/hilbert-blog`。如果你想换成别的仓库：
