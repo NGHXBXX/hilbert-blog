@@ -27,7 +27,18 @@ jobs:
       - name: Build static site
         run: bash build-site.sh
 
+      - name: Check Cloudflare secrets
+        id: secrets
+        run: |
+          if [ -z "${{ secrets.CLOUDFLARE_API_TOKEN }}" ] || [ -z "${{ secrets.CLOUDFLARE_ACCOUNT_ID }}" ]; then
+            echo "::notice title=Cloudflare secrets missing::请先在仓库 Settings → Secrets and variables → Actions 添加 CLOUDFLARE_API_TOKEN 和 CLOUDFLARE_ACCOUNT_ID，工作流会自动部署。"
+            echo "skip=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "skip=false" >> "$GITHUB_OUTPUT"
+          fi
+
       - name: Deploy to Cloudflare Pages
+        if: steps.secrets.outputs.skip != 'true'
         uses: cloudflare/wrangler-action@v3
         with:
           apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
