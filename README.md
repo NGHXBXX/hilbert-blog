@@ -96,12 +96,14 @@ node build.mjs
    - `CLOUDFLARE_ACCOUNT_ID`：Cloudflare 账户 ID（Workers & Pages 概览页右侧可以复制）
 4. 工作流文件是 [`.github/workflows/deploy-cloudflare.yml`](.github/workflows/deploy-cloudflare.yml)。之后每次 `git push` 到 `main`，GitHub Actions 会自动 `bash build-site.sh` 并部署到现有的 `hilbert-blog` 项目，地址不变。
 
-这个目录已经初始化成 git 仓库并提交了第一个 commit，接下来只需要把它连到 GitHub：
+这个目录已经初始化成 git 仓库、提交了第一个 commit，并连上了 GitHub 仓库 `NGHXBXX/hilbert-blog`。如果你想换成别的仓库：
 
 ```bash
-git remote add origin git@github.com:你的用户名/hilbert-blog.git
+git remote set-url origin git@github.com:你的用户名/另一个仓库.git
 git push -u origin main
 ```
+
+Cloudflare 的两个 Secret 没配好之前，工作流会自动跳过部署并给出提示，不影响仓库本身。
 
 只需要首次配置一次，以后写文章就是：
 
